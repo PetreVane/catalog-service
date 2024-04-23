@@ -1,3 +1,7 @@
+# Read Me First
+The following was discovered as part of building this project:
+
+* The original package name 'eu.childrens-universe.catalog-service' is invalid and this project uses 'eu.childrensuniverse.catalogservice' instead.
 
 # Getting Started
 
