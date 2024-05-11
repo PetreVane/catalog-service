@@ -1,4 +1,4 @@
-package eu.childrensuniverse.catalogservice.controller;
+package eu.childrensuniverse.catalogservice.web;
 
 
 import org.springframework.http.ResponseEntity;
