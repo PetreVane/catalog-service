@@ -3,8 +3,6 @@ package eu.childrensuniverse.catalogservice.data;
 import eu.childrensuniverse.catalogservice.exceptions.BookNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class BookService
 {
