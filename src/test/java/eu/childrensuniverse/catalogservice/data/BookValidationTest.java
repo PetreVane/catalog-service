@@ -25,7 +25,7 @@ public class BookValidationTest {
     }
 
     @Test
-    public void successValidation()
+    public void successfulValidation()
     {
         Book book = new Book("1234567890", "Title", "Author", 9.90);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
