@@ -14,12 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class BookValidationTest {
+public class BookValidationTest
+{
 
     public static Validator validator;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUp()
+    {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
