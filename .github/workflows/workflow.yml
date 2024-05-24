@@ -1,0 +1,35 @@
+name: workflow.yml
+on: push
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Code vulnerability scanning
+        uses: anchore/scan-action@v3
+        id: scan
+        with:
+          path: "${{ github.workspace }}"
+          fail-build: false # Set to true if you want the build to fail if vulnerabilities are found
+          severity-cutoff: high # The minimum security category to be considered as an error (low, medium, high, critical)
+          acs-report-enable: true # Whether to enable the generation of a report after the scan is completed
+      - name: Upload vulnerability report
+        uses: github/codeql-action/upload-sarif@v2 #Uploads the security vulnerability report to GitHub (SARIF format)
+        if: success() || failure()
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }} #Fetches the report from the output of the previous step
+      - name: Build, unit tests and integration tests
+        run: |
+          chmod +x gradlew 
+          ./gradlew build
