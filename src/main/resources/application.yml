@@ -1,0 +1,24 @@
+catalog-service:
+  welcome-message: "This is the Children Universe Catalog Service. Welcome!"
+
+spring:
+  application:
+    name: catalog-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+server:
+  address: 0.0.0.0
+  port: 9001
+  tomcat:
+    connection-timeout: 3s
+    keep-alive-timeout: 15s
+    threads:
+      max: 30
+      min-spare: 5
+
+
+

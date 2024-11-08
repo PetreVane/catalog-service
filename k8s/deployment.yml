@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: catalog-service
-          image: catalog-service:0.0.1-SNAPSHOT
+          image: catalog-service:0.2-DEV
           imagePullPolicy: Never  # or IfNotPresent
           ports:
             - containerPort: 9001
