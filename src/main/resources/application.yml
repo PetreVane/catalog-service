@@ -1,6 +1,7 @@
 catalog-service:
   welcome-message: "This is the Children Universe Catalog Service. Welcome!"
 
+# spring cloud configs
 spring:
   application:
     name: catalog-service
@@ -9,7 +10,16 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+      request-connect-timeout: 5000
+      request-read-timeout: 5000
+      fail-fast: true
+      retry:
+        max-attempts: 6
+        initial-interval: 1000
+        max-interval: 2000
+        multiplier: 1.1
 
+# server configs
 server:
   address: 0.0.0.0
   port: 9001
@@ -22,3 +32,9 @@ server:
 
 
 
+# management configs
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh # exposes the /actuator/refresh endpoint
