@@ -19,7 +19,7 @@ class CatalogServiceApplicationTests
 	@Test
 	void testUpdateCatalog()
 	{
-		Book expectedBook = new Book("1234567890", "Title", "Author", 9.90);
+		Book expectedBook = Book.of("1234567890", "Title", "Author", 9.90, "Unknown publisher");
 
 		webTestClient
 				.post()

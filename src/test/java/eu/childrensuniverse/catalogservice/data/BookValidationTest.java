@@ -29,7 +29,7 @@ public class BookValidationTest
     @Test
     public void successfulValidation()
     {
-        Book book = new Book("1234567890", "Title", "Author", 9.90);
+        Book book = Book.of("1234567890", "Title", "Author", 9.90, "Unknown publisher");
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertTrue(violations.isEmpty());
     }
@@ -37,7 +37,7 @@ public class BookValidationTest
     @Test
     public void failedValidation()
     {
-        Book book = new Book("123456dsfgf7890", "Title", "Author", 9.90);
+        Book book = Book.of("123456dsfgf7890", "Title", "Author", 9.90, "Unknown publisher");
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertFalse(violations.isEmpty());
         assertThat(violations.iterator().next().getMessage()).isEqualTo("The ISBN format must be valid.");

@@ -26,8 +26,8 @@ class BookServiceTest
     @Test
     void getAllBooks_ReturnsAllBooks()
     {
-        var books = Arrays.asList(new Book("123", "Test Book 1", "Author 1", 9.99),
-                new Book("456", "Test Book 2", "Author 2", 19.99));
+        var books = Arrays.asList(Book.of("123", "Test Book 1", "Author 1", 9.99, "Unknown publisher"),
+                 Book.of("456", "Test Book 2", "Author 2", 19.99, "Unknown publisher"));
         when(bookRepository.findAll()).thenReturn(books);
 
         var result = bookService.getAllBooks();
@@ -38,7 +38,7 @@ class BookServiceTest
     @Test
     void getBookByIsbn_ExistingIsbn_ReturnsBook() throws BookNotFoundException
     {
-        var book = new Book("123", "Test Book", "Author", 9.99);
+        var book = Book.of("123", "Test Book", "Author", 9.99, "Unknown publisher");
         when(bookRepository.findByIsbn("123")).thenReturn(Optional.of(book));
 
         var result = bookService.getBookByIsbn("123");
@@ -57,7 +57,7 @@ class BookServiceTest
     @Test
     void saveBook_SavesAndReturnsBook()
     {
-        var book = new Book("123", "Test Book", "Author", 9.99);
+        var book =  Book.of("123", "Test Book", "Author", 9.99, "Unknown publisher");
         when(bookRepository.save(any(Book.class))).thenReturn(book);
 
         var result = bookService.saveBook(book);
@@ -78,12 +78,12 @@ class BookServiceTest
     @Test
     void updateBook_ExistingIsbn_UpdatesBook()
     {
-        var existingBook = new Book("123", "Old Title", "Old Author", 8.99);
-        var updatedBook = new Book("123", "New Title", "New Author", 10.99);
+        var existingBook = Book.of("123", "Old Title", "Old Author", 8.99, "Unknown publisher");
+        var updatedBook = Book.of("123", "New Title", "New Author", 10.99, "Unknown publisher");
         when(bookRepository.findByIsbn("123")).thenReturn(Optional.of(existingBook));
         when(bookRepository.save(any(Book.class))).thenReturn(updatedBook);
 
-        var result = bookService.updateBook("123", new Book("123", "New Title", "New Author", 10.99));
+        var result = bookService.updateBook("123", Book.of("123", "New Title", "New Author", 10.99, "Unknown publisher"));
 
         assertEquals(updatedBook, result);
     }
